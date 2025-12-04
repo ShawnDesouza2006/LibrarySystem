@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block head%}
+<title>Library</title>
+<header>
+    <div class="content">
+        <h1>Library</h1>
+        <!-- Search and category filter -->
+        <div class="search-wrapper">
+            <input class="bar" placeholder="Search..." type="search" id="search" data-search>
+            <select class="cat" name="category" id="category" data-category-select>
+                <option value="None">Category</option>
+                <option value="Book">Book</option>
+                <option value="Film">Film</option>
+                <option value="Album">Magazine</option>
+            </select>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block body %}
+<div>
+    <br></br>
+    {% if tasks|length == 0 %}
+        <p>No Media yet! Add Media now.</p>
+    {% else %}
+    <!-- Table for displaying media items (populated by JavaScript) -->
+    <div data-user-cards-container>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Publication Date</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Remove</th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Template for each media row -->
+    <template data-user-template>
+        <tr class="user-card">
+            <td data-name></td>
+            <td data-date></td>
+            <td data-author></td>
+            <td data-category></td>
+            <td><a data-delete href="#"><img src="{{ url_for('static', filename='Assets/Trash.png') }}" height = 20 width = 20></a></td>
+        </tr>
+    </template>
+    {% endif %}
+
+    <!-- Form to add new media -->
+    <form class="enter" action="/" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+
+        <label for="publication_date">Publication Date:</label>
+        <input type="text" name="publication_date" id="publication_date">
+
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author">
+
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="Book">Book</option>
+            <option value="Film">Film</option>
+            <option value="Album">Magazine</option>
+        </select>
+
+        <br></br>
+
+        <input type="submit" value="Add Media">
+    </form>
+</div>
+{% endblock %}
+

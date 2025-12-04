@@ -1,0 +1,97 @@
+body, html {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #9D4EDD;
+    color: #ffffff;
+}
+
+header {
+    background-image: linear-gradient(to top, #9D4EDD, #5A189A), url("../../images/bg.jpg");
+    border: 1px solid #000000;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+    margin: 0px;
+    -webkit-text-stroke: #300536 3px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.content {
+    margin: 0 auto;
+}
+
+table, td, th {
+    border: 1px solid #aaa;
+    text-align: center;
+    
+}
+
+.search-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.bar {
+    width: 80%;
+    height: 40px;
+    font-size: 16px;
+    margin-right: -6px;
+}
+
+.cat {
+    width: 8%;
+    height: 40px;
+    font-size: 16px;
+}
+
+.hide {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+    background-color: #3e0477;
+}
+
+td {
+    background-color: #cd9ff1;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 70%;
+}
+
+label {
+    margin-left: 10px;
+}
+
+.enter {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p{
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
