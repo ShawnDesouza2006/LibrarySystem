@@ -68,60 +68,9 @@ def delete(id):
     except:
         return 'There was a problem deleting that task'
 
-@app.route('/export/json')
-def export_json():
-    # Export all media as downloadable JSON file
-    import json
-    from datetime import datetime
-    
-    tasks = Todo.query.all()
-    data = {
-        "export_date": datetime.now().isoformat(),
-        "total_items": len(tasks),
-        "tasks": [
-            {
-                "id": task.id,
-                "name": task.name,
-                "publication_date": task.publication_date,
-                "author": task.author,
-                "category": task.category
-            }
-            for task in tasks
-        ]
-    }
-    
-    filename = f"library_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    return jsonify(data), 200, {'Content-Disposition': f'attachment; filename={filename}'}
-
-@app.route('/export/json/save')
-def export_json_save():
-    # Update library_data.json file with current database
-    import json
-    
-    tasks = Todo.query.all()
-    data = [
-        {
-            "id": t.id,
-            "name": t.name,
-            "publication_date": t.publication_date,
-            "author": t.author,
-            "category": t.category
-        }
-        for t in tasks
-    ]
-    
-    filename = "library_data.json"
-    with open(filename, 'w') as f:
-        json.dump(data, f, indent=2)
-    
-    return f"JSON file updated: {filename}"
-
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        
-        # Auto-export database to JSON on app launch
-        import json
         
         tasks = Todo.query.all()
         data = [
@@ -134,9 +83,5 @@ if __name__ == "__main__":
             }
             for t in tasks
         ]
-        
-        filename = "library_data.json"
-        with open(filename, 'w') as f:
-            json.dump(data, f, indent=2)
 
     app.run(debug=True)
