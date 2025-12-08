@@ -72,17 +72,5 @@ def delete(id):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        
-        tasks = Todo.query.all()
-        data = [
-            {
-                "id": t.id,
-                "name": t.name,
-                "publication_date": t.publication_date,
-                "author": t.author,
-                "category": t.category
-            }
-            for t in tasks
-        ]
 
     app.run(debug=True)
