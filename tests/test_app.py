@@ -15,19 +15,25 @@ def test_add_task(test_client):
     assert task.name == "Test Book"
 
 
-def test_api_tasks(test_client):
-    """Test the /api/tasks JSON output."""
-    task = Todo(name="Sample", publication_date="2020",
-                author="Bob", category="Category")
-    db.session.add(task)
+def test_index_renders_template_simple(test_client):
+    """Simple check that the index page contains the frontend markers."""
+    # Ensure there's at least one task so the template renders the table/container
+    sample = Todo(name="Sample", publication_date="2020", author="Tester", category="Sample")
+    db.session.add(sample)
     db.session.commit()
 
-    response = test_client.get('/api/tasks')
-    data = response.get_json()
+    resp = test_client.get('/')
+    assert resp.status_code == 200
+    body = resp.data.decode('utf-8', errors='ignore')
 
-    assert response.status_code == 200
-    assert len(data) == 1
-    assert data[0]["name"] == "Sample"
+    # These are the attributes/strings your JS expects in the template.
+    assert 'data-user-cards-container' in body
+    assert 'data-user-template' in body
+    assert 'data-search' in body
+    assert 'data-category-select' in body
+    assert 'class="enter"' in body or "class='enter'" in body
+    # Also check the Add button or form text exists
+    assert 'Add Media' in body or 'Add' in body
 
 
 def test_delete_task(test_client):
